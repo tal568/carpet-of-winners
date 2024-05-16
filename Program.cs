@@ -6,7 +6,7 @@ namespace MyApp
     {
         static void Main(string[] args)
         {
-            string[,] board = InitBoard();
+            char[,] board = InitBoard();
               PrintBoard(board);
 
             SetInitPlayerPosionOnBoard(board);
@@ -14,34 +14,34 @@ namespace MyApp
 
 
         }
-        public static string[,] InitBoard()
+        public static char[,] InitBoard()
         {
-            string[,] board = new string[32, 32];
+            char[,] board = new char[32, 32];
             for (int col=0; col<board.GetLength(0); col++)
                 for(int row=0; row<board.GetLength(1); row++)
                 {
                     if(col==0 || row == 0||col==31||row==31)
                     {
-                        board[col, row] = "#";
+                        board[col, row] = '#';
                     }
                     else
-                        board[col, row] = " ";
+                        board[col, row] = ' ';
 
                 }
             return board;
         }
-        public static void PrintBoard(string[,] board)
+        public static void PrintBoard(char[,] board)
         {
             for (int col = 0; col < board.GetLength(0); col++)
             {
                 for (int row = 0; row < board.GetLength(1); row++)
                 {
-                    Console.Write(board[col, row]);
+                    Console.Write(board[col, row]+" ");
                 }
-                Console.Write(Environment.NewLine + Environment.NewLine);
+                Console.WriteLine();
             }
         }
-        public static void SetInitPlayerPosionOnBoard(string[,] board)
+        public static void SetInitPlayerPosionOnBoard(char[,] board)
         {
             int NUMBER_OF_PLAYERS = 2;
             for (int i = 1; i < NUMBER_OF_PLAYERS+1; i++)
@@ -55,7 +55,7 @@ namespace MyApp
                      rowIndex = int.Parse(Console.ReadLine());
                     Console.WriteLine($"enter user {i} col index");
                      colIndex = int.Parse(Console.ReadLine());
-                    if (board[colIndex,rowIndex]!=" ")
+                    if (board[colIndex,rowIndex]!=' ')
                     {
                         isIlegalMove=false;
                     }
@@ -65,7 +65,7 @@ namespace MyApp
                     }
 
                 }
-                board[colIndex, rowIndex] = (i + 1).ToString();
+                board[colIndex, rowIndex] = (char)(i + 1);
             }
         }
 
