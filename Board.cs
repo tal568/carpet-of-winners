@@ -33,36 +33,40 @@ namespace carpet_of_winners.git
                 }
             }
         }
-        public bool AddPlayer(Player player)
+        public string AddPlayer(Player player)
         {
-            if (!IsWithinBounds(player.Row, player.Col) || IsPlayerInsidePlayer(player))
-                return false;
+            if (!IsWithinBounds(player.Row, player.Col))
+                return "player is outside the board";
+            if (IsWithinPlayer(player.Col,player.Row))
+                return "there a player in that posion";
                 Players.Add(player);
                 grid[player.Row, player.Col] = player.Number;
-                return true; 
+                return ""; 
        
         }
-        public bool IsPlayerInsidePlayer(Player player)
+        public bool IsWithinPlayer(int col,int row)
         {
             foreach(var playerOnBoard in Players)
             {
-                if (playerOnBoard.Col == player.Col && playerOnBoard.Row == player.Row)
+                if (playerOnBoard.Col == col && playerOnBoard.Row == row)
                     return true;
             }
             return false;
         }
-        public bool AddCarpet(Carpet carpet)
+        public string AddCarpet(Carpet carpet)
         {
-            if (!IsWithinBounds(carpet.TopLeftRow, carpet.TopLeftCol) || !IsWithinBounds(carpet.BottomRightRow, carpet.BottomRightCol)|| carpet.BottomRightCol - carpet.TopLeftCol == 0)
-                return false;
+            if (!IsWithinBounds(carpet.TopLeftRow, carpet.TopLeftCol) || !IsWithinBounds(carpet.BottomRightRow, carpet.BottomRightCol))
+                return "carpet outside of board";
+            if (carpet.BottomRightCol - carpet.TopLeftCol == 0)
+                return "the size of the carpet is 0";
             foreach(var playerOnBoard in Players)
             {
                 if (carpet.Contains(playerOnBoard.Row, playerOnBoard.Col))
-                    return false;
+                    return "invalid there are players in the carpet ";
             }
             Carpet = carpet;
             FillBoardWithCarpet();
-            return true;
+            return "";
 
         }
 
@@ -100,15 +104,20 @@ namespace carpet_of_winners.git
                     newRow += 1;
                     break;
             }
-            // TODO: need to check move validity
-            // Remove the player from the current position
+            if (ISIlegalMove(newCol,newRow))
+                return;
             grid[player.Row, player.Col] = 0;
-
-            // Update the player's position
-            player.Move(newRow, newCol);
+            player.Move(newCol, newRow);
 
             // Mark the new position
-            grid[newRow, newCol] = player.Number;
+            grid[newCol, newRow] = player.Number;
+        }
+
+        private bool ISIlegalMove(int newCol,int newRow)
+        {
+            if (!IsWithinBounds(newCol, newRow) || IsWithinPlayer(newCol, newRow))
+                return true;
+            return false;
         }
 
         public void PrintBoard()

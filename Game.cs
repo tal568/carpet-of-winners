@@ -10,9 +10,9 @@ namespace carpet_of_winners.git
     {
         private Board _board;
 
-        public Game()
+        public Game(int colNum,int rowNum)
         {
-            _board = new(30,30);
+            _board = new(colNum,rowNum);
         }
         public void InitGame(int numberofPlayers)
         {
@@ -25,10 +25,10 @@ namespace carpet_of_winners.git
             while (true)
             {
                 foreach (var player in _board.Players) { 
-                    Console.WriteLine($"user {player.Number} turn (1-up 2-down 3-left 4-down)");
+                    Console.WriteLine($"user {player.Number} turn (1-up 2-down 3-left 4-right)");
                     string userMove = Console.ReadLine();
                     Direction direction;
-                    Enum.TryParse<Direction>(userMove,out direction);
+                    Enum.TryParse(userMove,out direction);
                     _board.MovePlayer(player,direction);
                     _board.PrintBoard();
                 }
@@ -38,8 +38,8 @@ namespace carpet_of_winners.git
         private void InitCarpet()
         { 
             
-                bool isAdded = false;
-                while (!isAdded)
+                string errorMessage = "_";
+                while (errorMessage!="")
                 {
                     Console.WriteLine($"Enter carpet Top left Col");
                     int col = int.Parse(Console.ReadLine());
@@ -47,11 +47,9 @@ namespace carpet_of_winners.git
                     int row = int.Parse(Console.ReadLine());
                     Console.WriteLine($"Enter carpet size");
                     int size = int.Parse(Console.ReadLine());
-                    isAdded = _board.AddCarpet(new Carpet(row, col, size - 1));
-                    if (!isAdded)
-                    {
-                        Console.WriteLine("invalid posison for carpet");
-                    }
+                errorMessage = _board.AddCarpet(new Carpet(row, col, size));
+                if(errorMessage!="")
+                Console.WriteLine(errorMessage);
 
                 }
             
@@ -61,18 +59,16 @@ namespace carpet_of_winners.git
         {
             for (int i=1; numberofPlayers>i-1;i++)
             {
-                bool isAdded = false;
-                while (!isAdded)
+                string errorMessage = "_";
+                while (errorMessage!="")
                 {
                     Console.WriteLine($"Enter user {i} Col");
                     int col = int.Parse(Console.ReadLine());
                     Console.WriteLine($"Enter user {i} Row");
                     int row = int.Parse(Console.ReadLine());
-                    isAdded = _board.AddPlayer(new Player(col, row,i));
-                    if (!isAdded)
-                    {
-                        Console.WriteLine($"invalid posison for player {i}");
-                    }
+                    errorMessage = _board.AddPlayer(new Player(col, row,i));
+                    if (errorMessage != "")
+                        Console.WriteLine(errorMessage);
                 }
             }
         }
