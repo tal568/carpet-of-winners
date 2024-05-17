@@ -16,15 +16,10 @@ namespace MyApp
         }
         public static char[,] InitBoard()
         {
-            char[,] board = new char[32, 32];
+            char[,] board = new char[30, 30];
             for (int col=0; col<board.GetLength(0); col++)
                 for(int row=0; row<board.GetLength(1); row++)
                 {
-                    if(col==0 || row == 0||col==31||row==31)
-                    {
-                        board[col, row] = '#';
-                    }
-                    else
                         board[col, row] = ' ';
 
                 }
