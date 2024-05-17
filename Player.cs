@@ -18,7 +18,7 @@ namespace carpet_of_winners.git
             Row = row;
 
         }
-        public void move(int newCol,int newRow)
+        public void Move(int newCol,int newRow)
         {
             Row = newRow;
             Col = newCol;
