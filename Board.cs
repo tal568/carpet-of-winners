@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace carpet_of_winners.git
+﻿namespace carpet_of_winners.git
 {
     internal class Board
     {
@@ -12,10 +6,10 @@ namespace carpet_of_winners.git
         public List<Player> Players { get; private set; }
         public Carpet? Carpet { get; private set; }
 
-        public Board(int cols ,int rows)
+        public Board(int cols, int rows)
         {
             grid = new int[cols, rows];
-           Carpet=null;
+            Carpet = null;
             Players = new List<Player>();
         }
 
@@ -33,40 +27,55 @@ namespace carpet_of_winners.git
                 }
             }
         }
-        public string AddPlayer(Player player)
+        public bool AddPlayer(Player player)
         {
             if (!IsWithinBounds(player.Row, player.Col))
-                return "player is outside the board";
-            if (IsWithinPlayer(player.Col,player.Row))
-                return "there a player in that posion";
-                Players.Add(player);
-                grid[player.Row, player.Col] = player.Number;
-                return ""; 
-       
+            {
+                Console.WriteLine($"player{player.Number} is outside the board");
+                return false;
+            }
+            if (IsWithinPlayer(player.Col, player.Row))
+            {
+                Console.WriteLine($"player{player.Number} cant move to ocupit tile");
+                return false;
+            }
+            Players.Add(player);
+            grid[player.Row, player.Col] = player.Number;
+            return true;
+
         }
-        public bool IsWithinPlayer(int col,int row)
+        public bool IsWithinPlayer(int col, int row)
         {
-            foreach(var playerOnBoard in Players)
+            foreach (var playerOnBoard in Players)
             {
                 if (playerOnBoard.Col == col && playerOnBoard.Row == row)
                     return true;
             }
             return false;
         }
-        public string AddCarpet(Carpet carpet)
+        public bool AddCarpet(Carpet carpet)
         {
             if (!IsWithinBounds(carpet.TopLeftRow, carpet.TopLeftCol) || !IsWithinBounds(carpet.BottomRightRow, carpet.BottomRightCol))
-                return "carpet outside of board";
+            {
+                Console.WriteLine("carpet outside of board");
+                return false;
+            }
             if (carpet.BottomRightCol - carpet.TopLeftCol == 0)
-                return "the size of the carpet is 0";
-            foreach(var playerOnBoard in Players)
+            {
+                Console.WriteLine("the size of the carpet is 0");
+                return false;
+            }
+            foreach (var playerOnBoard in Players)
             {
                 if (carpet.Contains(playerOnBoard.Row, playerOnBoard.Col))
-                    return "invalid there are players in the carpet ";
+                {
+                    Console.WriteLine("invalid there are players in the carpet");
+                    return false;
+                }
             }
             Carpet = carpet;
             FillBoardWithCarpet();
-            return "";
+            return true;
 
         }
 
@@ -81,10 +90,10 @@ namespace carpet_of_winners.git
             {
                 throw new InvalidOperationException("carpet was not added to board");
             }
-            return  Carpet.Contains(row, col);
+            return Carpet.Contains(row, col);
         }
 
-        public void MovePlayer(Player player, Direction direction)
+        public bool MovePlayer(Player player, Direction direction)
         {
             int newRow = player.Row;
             int newCol = player.Col;
@@ -105,25 +114,22 @@ namespace carpet_of_winners.git
                     break;
             }
             if (ISIlegalMove(newCol, newRow))
-            {
-                return;
-                
-            }
+                return false;
             grid[player.Row, player.Col] = 0;
             player.Move(newCol, newRow);
 
-            // Mark the new position
             grid[newCol, newRow] = player.Number;
+            return true;
         }
 
-        private bool ISIlegalMove(int newCol,int newRow)
+        private bool ISIlegalMove(int newCol, int newRow)
         {
             if (!IsWithinBounds(newCol, newRow))
             {
                 Console.WriteLine("skiping turn outside of board");
                 return true;
             }
-            if(IsWithinPlayer(newCol, newRow))
+            if (IsWithinPlayer(newCol, newRow))
             {
                 Console.WriteLine("skiping turn there a existing pice in the new location");
                 return true;
