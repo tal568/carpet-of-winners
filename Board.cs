@@ -104,8 +104,11 @@ namespace carpet_of_winners.git
                     newRow += 1;
                     break;
             }
-            if (ISIlegalMove(newCol,newRow))
+            if (ISIlegalMove(newCol, newRow))
+            {
                 return;
+                
+            }
             grid[player.Row, player.Col] = 0;
             player.Move(newCol, newRow);
 
@@ -115,8 +118,16 @@ namespace carpet_of_winners.git
 
         private bool ISIlegalMove(int newCol,int newRow)
         {
-            if (!IsWithinBounds(newCol, newRow) || IsWithinPlayer(newCol, newRow))
+            if (!IsWithinBounds(newCol, newRow))
+            {
+                Console.WriteLine("skiping turn outside of board");
                 return true;
+            }
+            if(IsWithinPlayer(newCol, newRow))
+            {
+                Console.WriteLine("skiping turn there a existing pice in the new location");
+                return true;
+            }
             return false;
         }
 
