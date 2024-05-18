@@ -6,14 +6,14 @@ internal class Player
     public int Col { get; private set; }
     public int Row { get; private set; }
 
-    public Player(int col, int row, int number)
+    public Player(int row, int col, int number)
     {
         Number = number;
         Col = col;
         Row = row;
     }
 
-    public void Move(int newCol, int newRow)
+    public void Move(int newRow, int newCol)
     {
         Row = newRow;
         Col = newCol;

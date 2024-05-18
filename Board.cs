@@ -119,24 +119,24 @@ internal class Board
                 newRow += 1;
                 break;
         }
-        if (IsIlegalMove(newCol, newRow))
+        if (IsIlegalMove(newRow, newCol))
             return false;
         _grid[player.Row, player.Col] = 0;
-        player.Move(newCol, newRow);
+        player.Move(newRow, newCol);
 
         _grid[newCol, newRow] = player.Number;
         return true;
     }
 
-    private bool IsIlegalMove(int newCol, int newRow)
+    private bool IsIlegalMove(int newRow, int newCol)
     {
-        if (!IsWithinBounds(newCol, newRow))
+        if (!IsWithinBounds(newRow, newCol))
         {
 
             _printToScreent.PrintColorString($"Illegal Move: Can’t move outside the board. skiping turn\n", ConsoleColor.Yellow);
             return true;
         }
-        if (IsWithinPlayer(newCol, newRow))
+        if (IsWithinPlayer(newRow, newCol))
         {
             _printToScreent.PrintColorString($"Illegal Move: Can’t Move to occupied location.  skiping turn\n", ConsoleColor.Yellow);
             return true;

@@ -18,20 +18,20 @@ internal class Game
         ;
     }
 
-    public void InitRound(int numberofPlayers, int colNum, int rowNum)
+    public void InitRound(int numberofPlayers, int rowNum, int colNum)
     {
-        _board = new(colNum, rowNum);
+        _board = new(rowNum, colNum);
         InitPlayers(numberofPlayers);
         InitCarpet();
         _board.PrintBoard();
     }
 
-    public void GameLoop(int numberofPlayers, int colNum, int rowNum)
+    public void GameLoop(int numberofPlayers, int rowNum, int colNum)
     {
         bool isGameRunning = true;
         while (isGameRunning)
         {
-            InitRound(numberofPlayers, colNum, rowNum);
+            InitRound(numberofPlayers, rowNum, colNum);
             Round();
             isGameRunning = CheakIfUserWhantToContinue();
         }
@@ -93,7 +93,7 @@ internal class Game
                 if (_board.MovePlayer(player, direction))
                     _gameStatistics["totalSteps" + player.Number.ToString()] += 1;
                 _board.PrintBoard();
-                isPlayerWon = IsPlayerWon(player1.Col, player1.Row, player2.Col, player2.Row);
+                isPlayerWon = IsPlayerWon(player1.Row, player1.Col, player2.Row, player2.Col);
                 if (isPlayerWon)
                 {
                     Console.WriteLine($"player {player.Number} WON");
@@ -139,7 +139,7 @@ internal class Game
                 int row;
                 bool isIntRow = int.TryParse(Console.ReadLine(), out row);
                 if (isIntCol && isIntRow)
-                    wasPlayerAdded = _board.AddPlayer(new Player(col, row, i));
+                    wasPlayerAdded = _board.AddPlayer(new Player(row, col, i));
                 else
                     Console.WriteLine("only int values alowed");
             }
