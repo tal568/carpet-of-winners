@@ -1,10 +1,9 @@
-﻿namespace carpet_of_winners.git
+﻿namespace carpet_of_winners.git;
+
+public enum Direction
 {
-    public enum Direction
-    {
-        Up = 1,
-        Down = 2,
-        Left = 3,
-        Right = 4
-    }
+    Up = 1,
+    Down = 2,
+    Left = 3,
+    Right = 4
 }
