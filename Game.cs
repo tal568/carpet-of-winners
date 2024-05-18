@@ -1,12 +1,13 @@
 ﻿using carpet_of_winners.git.Utils;
+using System.Numerics;
 
 namespace carpet_of_winners.git;
 
 internal class Game
 {
     private Board? _board;
-    private Dictionary<string, int> _gameStatistics;
-    private ConsolePrintColorString _printToScreent;
+    private readonly Dictionary<string, int> _gameStatistics;
+    private readonly ConsolePrintColorString _printToScreent;
 
     public Game()
     {
@@ -35,6 +36,7 @@ internal class Game
         bool isGameRunning = true;
         while (isGameRunning)
         {
+            _board = new(30, 30);
             InitRound(numberofPlayers, rowNum, colNum);
             Round();
             isGameRunning = CheakIfUserWhantToContinue();
@@ -67,47 +69,60 @@ internal class Game
         Console.WriteLine("player2 round won:" + _gameStatistics["NumberOfWinsPlayer2"]);
 
         if (_gameStatistics["NumberOfWinsPlayer1"] > _gameStatistics["NumberOfWinsPlayer2"])
-            _printToScreent.PrintColorString("player1 won the GAME\n", ConsoleColor.Green);
+            PrintVictoryMessgae(1, true);
         else if (_gameStatistics["NumberOfWinsPlayer1"] < _gameStatistics["NumberOfWinsPlayer2"])
-            _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
+            PrintVictoryMessgae(2, true);
+
+
         else if (_gameStatistics["totalSteps1"] > _gameStatistics["totalSteps2"])
-            _printToScreent.PrintColorString("player1 won the GAME\n", ConsoleColor.Green);
+            PrintVictoryMessgae(1, true);
         else if (_gameStatistics["totalSteps1"] < _gameStatistics["totalSteps2"])
             _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
         else
-            _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
+            PrintVictoryMessgae(2, true);
+
     }
 
     private void Round()
     {
-        Player player1 = _board.Players.First();
-        Player player2 = _board.Players.ElementAt(1);
+        Player player1 = _board!.Players.First();
+        Player player2 = _board!.Players.ElementAt(1);
         bool isPlayerWon = false;
         while (!isPlayerWon)
         {
             foreach (var player in _board.Players)
             {
-                Console.Write($"user {player.Number} turn (1-up 2-down 3-left 4-right):");
-                Char userMove = Console.ReadKey().KeyChar;
-                Console.WriteLine("");
                 Direction direction;
+                Char userMove= GetMoveDiractionFromUserInput(player.Number);
                 Enum.TryParse(userMove.ToString(), out direction);
                 if (_board.MovePlayer(player, direction))
                     _gameStatistics["totalSteps" + player.Number.ToString()] += 1;
-                _board.PrintBoard();
                 isPlayerWon = IsPlayerWon(player1.Row, player1.Col, player2.Row, player2.Col);
                 if (isPlayerWon)
                 {
-                    _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
-                    _printToScreent.PrintColorString($"player {player.Number} WON the round\n",ConsoleColor.Cyan);
-                    _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
-
+                    PrintVictoryMessgae(player.Number,false);
                     _gameStatistics["NumberOfWinsPlayer" + player.Number.ToString()] += 1;
                     break;
                 }
                 PrintBestChanchToWin(player1.Row, player1.Col, player2.Row, player2.Col);
             }
         }
+
+      
+    }
+    private void PrintVictoryMessgae(int playerNumber,bool isFinalGame)
+    {
+        string stage = (isFinalGame ? "GAME!!!" : "Round");
+            _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
+            _printToScreent.PrintColorString($"player {playerNumber} is the Winner of the {stage}\n", ConsoleColor.Cyan);
+            _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
+    }
+    private Char GetMoveDiractionFromUserInput(int playerNumber)
+    {
+        Console.Write($"user {playerNumber} turn (1-up 2-down 3-left 4-right):");
+        Char userMove = Console.ReadKey().KeyChar;
+        Console.WriteLine("");
+        return userMove;
     }
 
     private void InitCarpet()
@@ -115,21 +130,31 @@ internal class Game
         bool wasCarpetAdded = false;
         while (!wasCarpetAdded)
         {
-            Console.Write($"Enter carpet Top left Row:");
-            int row;
-            bool isIntRow = int.TryParse(Console.ReadLine(), out row);
-            Console.Write($"Enter carpet Top left Col:");
-            int col;
-            bool isIntCol = int.TryParse(Console.ReadLine(), out col);
-            Console.Write($"Enter carpet size:");
-            int size;
-            bool isIntSize = int.TryParse(Console.ReadLine(), out size);
-            if (isIntCol && isIntRow && isIntSize)
-                wasCarpetAdded = _board.AddCarpet(new Carpet(row, col, size));
+            Carpet? carpet = CreateCarpetFromUserInput();
+            if (carpet is not null)
+                wasCarpetAdded = _board!.AddCarpet(carpet);
             else
                 Console.WriteLine("only int values alowed");
         }
     }
+    private  Carpet? CreateCarpetFromUserInput()
+    {
+        Console.Write($"Enter carpet Top left Row:");
+        int row;
+        bool isIntRow = int.TryParse(Console.ReadLine(), out row);
+        Console.Write($"Enter carpet Top left Col:");
+        int col;
+        bool isIntCol = int.TryParse(Console.ReadLine(), out col);
+        Console.Write($"Enter carpet size:");
+        int size;
+        bool isIntSize = int.TryParse(Console.ReadLine(), out size);
+        if (!isIntCol || !isIntRow || !isIntSize)
+            return null;
+        return new(row, col, size);
+    }
+    
+
+    
 
     private void InitPlayers(int numberofPlayers)
     {
@@ -138,25 +163,32 @@ internal class Game
             bool wasPlayerAdded = false;
             while (!wasPlayerAdded)
             {
-                Console.Write($"Enter user {i} Row:");
-                int row;
-                bool isIntRow = int.TryParse(Console.ReadLine(), out row);
-                Console.Write($"Enter user {i} Col:");
-                int col;
-                bool isIntCol = int.TryParse(Console.ReadLine(), out col);
-                if (isIntCol && isIntRow)
-                    wasPlayerAdded = _board.AddPlayer(new Player(row, col, i));
+
+                Player? player = CreatePlayerFromUserInput(i);
+                if(player is not null)
+                    wasPlayerAdded = _board!.AddPlayer(player);
                 else
                     Console.WriteLine("only int values alowed");
             }
         }
     }
-
+   private Player? CreatePlayerFromUserInput(int playerNumber)
+    {
+        Console.Write($"Enter user {playerNumber} Row:");
+        int row;
+        bool isIntRow = int.TryParse(Console.ReadLine(), out row);
+        Console.Write($"Enter user {playerNumber} Col:");
+        int col;
+        bool isIntCol = int.TryParse(Console.ReadLine(), out col);
+        if (!isIntCol || !isIntRow)
+            return null;
+        return new(row,col,playerNumber);
+    }
     private bool IsPlayerWon(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
     {
-        if (_board.Carpet.Contains(rowIndexA, colIndexA))
+        if (_board!.Carpet!.Contains(rowIndexA, colIndexA))
             return true;
-        if (_board.Carpet.Contains(rowIndexB, colIndexB))
+        if (_board!.Carpet.Contains(rowIndexB, colIndexB))
             return true;
         return false;
     }
@@ -170,7 +202,7 @@ internal class Game
                 _printToScreent.PrintColorString("both player are the same distense\n", ConsoleColor.Cyan);
                 break;
             case (1):
-                _printToScreent.PrintColorString("player1 is closer to win\n",ConsoleColor.Cyan);
+                _printToScreent.PrintColorString("player1 is closer to win\n", ConsoleColor.Cyan);
                 break;
 
             case (2):
@@ -181,7 +213,7 @@ internal class Game
 
     private int getWinnerWithBestChances(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
     {
-        int player1Distense = _board.DistenseOfPlayerFromCarpet(rowIndexA, colIndexA);
+        int player1Distense = _board!.DistenseOfPlayerFromCarpet(rowIndexA, colIndexA);
         int player2Distense = _board.DistenseOfPlayerFromCarpet(rowIndexB, colIndexB);
 
         if (player1Distense < player2Distense)

@@ -4,33 +4,20 @@ namespace carpet_of_winners.git;
 
 internal class Board
 {
-    private int[,] _grid;
-    private ConsolePrintColorString _printToScreent;
+    private readonly int[] _gridSize;
+    private readonly ConsolePrintColorString _printToScreent;
     public List<Player> Players { get; private set; }
     public Carpet? Carpet { get; private set; }
 
     public Board(int rows, int cols)
     {
-        _grid = new int[rows, cols];
+        _gridSize = new int[2] { rows, cols};
         Carpet = null;
         Players = new List<Player>();
         _printToScreent = new();
     }
 
-    private void FillBoardWithCarpet()
-    {
-        if (Carpet == null)
-        {
-            throw new InvalidOperationException("carpet was not added to board");
-        }
-        for (int i = Carpet.TopLeftRow; i <= Carpet.BottomRightRow; i++)
-        {
-            for (int j = Carpet.TopLeftCol; j <= Carpet.BottomRightCol; j++)
-            {
-                _grid[i, j] = 2;
-            }
-        }
-    }
+
 
     public bool AddPlayer(Player player)
     {
@@ -51,7 +38,6 @@ internal class Board
             return false;
         }
         Players.Add(player);
-        _grid[player.Row, player.Col] = player.Number;
         return true;
     }
 
@@ -98,13 +84,12 @@ internal class Board
             }
         }
         Carpet = carpet;
-        FillBoardWithCarpet();
         return true;
     }
 
     public bool IsWithinBounds(int row, int col)
     {
-        return row >= 0 && row < _grid.GetLength(0) && col >= 0 && col < _grid.GetLength(1);
+        return row >= 0 && row < _gridSize[0] && col >= 0 && col < _gridSize[1];
     }
 
     public bool IsWithinCarpet(int row, int col)
@@ -138,10 +123,10 @@ internal class Board
         }
         if (IsIlegalMove(newRow, newCol))
             return false;
-        _grid[player.Row, player.Col] = 0;
         player.Move(newRow, newCol);
 
-        _grid[newCol, newRow] = player.Number;
+        PrintBoard();
+
         return true;
     }
 
@@ -168,8 +153,8 @@ internal class Board
 
     public void PrintBoard()
     {
-        int rows = _grid.GetLength(0);
-        int cols = _grid.GetLength(1);
+        int rows = _gridSize[0];
+        int cols = _gridSize[1];
         PrintFrame(rows);
 
         for (int i = 0; i < rows; i++)
@@ -219,7 +204,7 @@ internal class Board
             throw new InvalidOperationException(
                 $"the player  does not exist in the row:{row} col:{col}"
             );
-        if (Carpet.Contains(player.Row, player.Col))
+        if (Carpet!.Contains(player.Row, player.Col))
             return 0;
         int minDistensRow,
             minDistensCol;
