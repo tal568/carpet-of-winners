@@ -7,10 +7,10 @@
 
     public Carpet(int topLeftRow, int topLeftCol, int size)
     {
-        TopLeftRow = topLeftRow;
-        TopLeftCol = topLeftCol;
-        BottomRightRow = topLeftRow + size;
-        BottomRightCol = topLeftCol + size;
+        TopLeftRow = topLeftRow-1;
+        TopLeftCol = topLeftCol-1;
+        BottomRightRow = topLeftRow + size-1;
+        BottomRightCol = topLeftCol + size-1;
     }
 
     public bool Contains(int row, int col)

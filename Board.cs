@@ -67,9 +67,9 @@ internal class Board
             _printToScreent.PrintColorString($"Error: Carpet dimension is outside of the board\n", ConsoleColor.Red);
             return false;
         }
-        if (carpet.BottomRightCol - carpet.TopLeftCol == 0)
+        if (carpet.BottomRightCol - carpet.TopLeftCol == -1)
         {
-            _printToScreent.PrintColorString($"Error: The Size og the curpet can't be o\n", ConsoleColor.Red);
+            _printToScreent.PrintColorString($"Error: The Size of the curpet must be greater then 1\n", ConsoleColor.Red);
             return false;
         }
         foreach (var playerOnBoard in Players)

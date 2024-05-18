@@ -109,12 +109,13 @@ internal class Game
         bool wasCarpetAdded = false;
         while (!wasCarpetAdded)
         {
-            Console.Write($"Enter carpet Top left Col:");
-            int col;
-            bool isIntCol = int.TryParse(Console.ReadLine(), out col);
+
             Console.Write($"Enter carpet Top left Row:");
             int row;
             bool isIntRow = int.TryParse(Console.ReadLine(), out row);
+            Console.Write($"Enter carpet Top left Col:");
+            int col;
+            bool isIntCol = int.TryParse(Console.ReadLine(), out col);
             Console.Write($"Enter carpet size:");
             int size;
             bool isIntSize = int.TryParse(Console.ReadLine(), out size);
@@ -132,12 +133,13 @@ internal class Game
             bool wasPlayerAdded = false;
             while (!wasPlayerAdded)
             {
-                Console.Write($"Enter user {i} Col:");
-                int col;
-                bool isIntCol = int.TryParse(Console.ReadLine(), out col);
+                
                 Console.Write($"Enter user {i} Row:");
                 int row;
                 bool isIntRow = int.TryParse(Console.ReadLine(), out row);
+                Console.Write($"Enter user {i} Col:");
+                int col;
+                bool isIntCol = int.TryParse(Console.ReadLine(), out col);
                 if (isIntCol && isIntRow)
                     wasPlayerAdded = _board.AddPlayer(new Player(row, col, i));
                 else

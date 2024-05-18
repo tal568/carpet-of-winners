@@ -9,8 +9,8 @@ internal class Player
     public Player(int row, int col, int number)
     {
         Number = number;
-        Col = col;
-        Row = row;
+        Col = col-1;
+        Row = row-1;
     }
 
     public void Move(int newRow, int newCol)
