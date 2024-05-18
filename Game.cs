@@ -69,7 +69,7 @@ internal class Game
     {
         Console.WriteLine("player1 round won:" + _gameStatistics["NumberOfWinsPlayer1"]);
         Console.WriteLine("player2 round won:" + _gameStatistics["NumberOfWinsPlayer2"]);
-        PrintVictoryMessgae(PlayerNumberWithMostWins, true);
+        PrintVictoryMessgae(PlayerNumberWithMostWins(), true);
     }
 
     private void Round()
