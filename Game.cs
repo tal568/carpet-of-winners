@@ -4,12 +4,11 @@ internal class Game
 {
     private Board? _board;
     private Dictionary<string, int> _gameStatistics;
-     private ConsolePrintColorString _printToScreent;
-
+    private ConsolePrintColorString _printToScreent;
 
     public Game()
     {
-        _printToScreent =new();
+        _printToScreent = new();
         _board = null;
         _gameStatistics = new Dictionary<string, int>
         {
@@ -66,17 +65,15 @@ internal class Game
         Console.WriteLine("player2 round won:" + _gameStatistics["NumberOfWinsPlayer2"]);
 
         if (_gameStatistics["NumberOfWinsPlayer1"] > _gameStatistics["NumberOfWinsPlayer2"])
-            _printToScreent.PrintColorString("player1 won the GAME\n",ConsoleColor.Green);
-        else if (
-            _gameStatistics["NumberOfWinsPlayer1"] < _gameStatistics["NumberOfWinsPlayer2"]
-        )
-            _printToScreent.PrintColorString("player2 won the GAME\n",ConsoleColor.Green);
+            _printToScreent.PrintColorString("player1 won the GAME\n", ConsoleColor.Green);
+        else if (_gameStatistics["NumberOfWinsPlayer1"] < _gameStatistics["NumberOfWinsPlayer2"])
+            _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
         else if (_gameStatistics["totalSteps1"] > _gameStatistics["totalSteps2"])
-            _printToScreent.PrintColorString("player1 won the GAME\n",ConsoleColor.Green);
+            _printToScreent.PrintColorString("player1 won the GAME\n", ConsoleColor.Green);
         else if (_gameStatistics["totalSteps1"] < _gameStatistics["totalSteps2"])
-            _printToScreent.PrintColorString("player2 won the GAME\n",ConsoleColor.Green);
+            _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
         else
-            _printToScreent.PrintColorString("player2 won the GAME\n",ConsoleColor.Green);
+            _printToScreent.PrintColorString("player2 won the GAME\n", ConsoleColor.Green);
     }
 
     private void Round()
@@ -103,8 +100,7 @@ internal class Game
                     _gameStatistics["NumberOfWinsPlayer" + player.Number.ToString()] += 1;
                     break;
                 }
-                PrintBestChanchToWin(player1.Row, player1.Col,player2.Row,player2.Col);
-
+                PrintBestChanchToWin(player1.Row, player1.Col, player2.Row, player2.Col);
             }
         }
     }
@@ -114,7 +110,6 @@ internal class Game
         bool wasCarpetAdded = false;
         while (!wasCarpetAdded)
         {
-
             Console.Write($"Enter carpet Top left Row:");
             int row;
             bool isIntRow = int.TryParse(Console.ReadLine(), out row);
@@ -138,7 +133,6 @@ internal class Game
             bool wasPlayerAdded = false;
             while (!wasPlayerAdded)
             {
-                
                 Console.Write($"Enter user {i} Row:");
                 int row;
                 bool isIntRow = int.TryParse(Console.ReadLine(), out row);
@@ -147,8 +141,6 @@ internal class Game
                 bool isIntCol = int.TryParse(Console.ReadLine(), out col);
                 if (isIntCol && isIntRow)
                     wasPlayerAdded = _board.AddPlayer(new Player(row, col, i));
-
-
                 else
                     Console.WriteLine("only int values alowed");
             }
@@ -163,8 +155,10 @@ internal class Game
             return true;
         return false;
     }
+
     private void PrintBestChanchToWin(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
-    { int closestToWin = getWinnerWithBestChances(rowIndexA, colIndexA, rowIndexB, colIndexB);
+    {
+        int closestToWin = getWinnerWithBestChances(rowIndexA, colIndexA, rowIndexB, colIndexB);
         if (closestToWin == 0)
             return;
         if (closestToWin == 1)
@@ -172,15 +166,15 @@ internal class Game
         if (closestToWin == 2)
             Console.WriteLine("player2 is closer to win");
     }
+
     private int getWinnerWithBestChances(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
     {
         int player1Distense = _board.DistenseOfPlayerFromCarpet(rowIndexA, colIndexA);
-        int player2Distense= _board.DistenseOfPlayerFromCarpet(rowIndexB, colIndexB);
+        int player2Distense = _board.DistenseOfPlayerFromCarpet(rowIndexB, colIndexB);
         if (player1Distense == 0 || player2Distense == 0)
             return 0;
         if (player1Distense < player2Distense)
             return 1;
         return 2;
-        
     }
 }

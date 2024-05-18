@@ -34,12 +34,18 @@ internal class Board
     {
         if (!IsWithinBounds(player.Row, player.Col))
         {
-            _printToScreent.PrintColorString($"Error: Player{player.Number} placed outside the board!\n", ConsoleColor.Red);
+            _printToScreent.PrintColorString(
+                $"Error: Player{player.Number} placed outside the board!\n",
+                ConsoleColor.Red
+            );
             return false;
         }
         if (IsWithinPlayer(player.Row, player.Col))
         {
-            _printToScreent.PrintColorString($"Error: Player{player.Number} can't move to occupied tile!\n", ConsoleColor.Red);
+            _printToScreent.PrintColorString(
+                $"Error: Player{player.Number} can't move to occupied tile!\n",
+                ConsoleColor.Red
+            );
             return false;
         }
         Players.Add(player);
@@ -64,19 +70,28 @@ internal class Board
             || !IsWithinBounds(carpet.BottomRightRow, carpet.BottomRightCol)
         )
         {
-            _printToScreent.PrintColorString($"Error: Carpet dimension is outside of the board\n", ConsoleColor.Red);
+            _printToScreent.PrintColorString(
+                $"Error: Carpet dimension is outside of the board\n",
+                ConsoleColor.Red
+            );
             return false;
         }
         if (carpet.BottomRightCol - carpet.TopLeftCol == -1)
         {
-            _printToScreent.PrintColorString($"Error: The Size of the curpet must be greater then 1\n", ConsoleColor.Red);
+            _printToScreent.PrintColorString(
+                $"Error: The Size of the curpet must be greater then 1\n",
+                ConsoleColor.Red
+            );
             return false;
         }
         foreach (var playerOnBoard in Players)
         {
             if (carpet.Contains(playerOnBoard.Row, playerOnBoard.Col))
             {
-                _printToScreent.PrintColorString($"Error: Can't place players on the carpet\n", ConsoleColor.Red);
+                _printToScreent.PrintColorString(
+                    $"Error: Can't place players on the carpet\n",
+                    ConsoleColor.Red
+                );
                 return false;
             }
         }
@@ -132,13 +147,18 @@ internal class Board
     {
         if (!IsWithinBounds(newRow, newCol))
         {
-
-            _printToScreent.PrintColorString($"Illegal Move: Can’t move outside the board. skiping turn\n", ConsoleColor.Yellow);
+            _printToScreent.PrintColorString(
+                $"Illegal Move: Can’t move outside the board. skiping turn\n",
+                ConsoleColor.Yellow
+            );
             return true;
         }
         if (IsWithinPlayer(newRow, newCol))
         {
-            _printToScreent.PrintColorString($"Illegal Move: Can’t Move to occupied location.  skiping turn\n", ConsoleColor.Yellow);
+            _printToScreent.PrintColorString(
+                $"Illegal Move: Can’t Move to occupied location.  skiping turn\n",
+                ConsoleColor.Yellow
+            );
             return true;
         }
         return false;
@@ -161,7 +181,7 @@ internal class Board
                     if (player.Row == i && player.Col == j)
                     {
                         _printToScreent.PrintColorString(
-                            player.Number.ToString()+" ",
+                            player.Number.ToString() + " ",
                             (player.Number == 1) ? ConsoleColor.Red : ConsoleColor.Green
                         );
                         isPlayerHere = true;
@@ -189,19 +209,26 @@ internal class Board
         }
         Console.WriteLine();
     }
-    public int DistenseOfPlayerFromCarpet(int row,int col)
+
+    public int DistenseOfPlayerFromCarpet(int row, int col)
     {
-        Player? player = Players.Find(player => player.Col == col && player.Row==row);
+        Player? player = Players.Find(player => player.Col == col && player.Row == row);
         if (player == null)
-            throw new InvalidOperationException($"the player  does not exist in the row:{row} col:{col}");
+            throw new InvalidOperationException(
+                $"the player  does not exist in the row:{row} col:{col}"
+            );
         if (Carpet.Contains(player.Row, player.Col))
             return 0;
-        int minDistensRow, minDistensCol;
-        minDistensRow = Math.Min(Math.Abs(player.Row - Carpet.BottomRightRow),Math.Abs(player.Row - Carpet.TopLeftRow));
-        minDistensCol = Math.Min(Math.Abs(player.Col - Carpet.BottomRightCol), Math.Abs(player.Col - Carpet.TopLeftCol));
+        int minDistensRow,
+            minDistensCol;
+        minDistensRow = Math.Min(
+            Math.Abs(player.Row - Carpet.BottomRightRow),
+            Math.Abs(player.Row - Carpet.TopLeftRow)
+        );
+        minDistensCol = Math.Min(
+            Math.Abs(player.Col - Carpet.BottomRightCol),
+            Math.Abs(player.Col - Carpet.TopLeftCol)
+        );
         return minDistensCol + minDistensRow;
-
     }
-
-
 }
