@@ -189,6 +189,19 @@ internal class Board
         }
         Console.WriteLine();
     }
+    public int DistenseOfPlayerFromCarpet(int row,int col)
+    {
+        Player? player = Players.Find(player => player.Col == col && player.Row==row);
+        if (player == null)
+            throw new InvalidOperationException($"the player  does not exist in the row:{row} col:{col}");
+        if (Carpet.Contains(player.Row, player.Col))
+            return 0;
+        int minDistensRow, minDistensCol;
+        minDistensRow = Math.Min(Math.Abs(player.Row - Carpet.BottomRightRow),Math.Abs(player.Row - Carpet.TopLeftRow));
+        minDistensCol = Math.Min(Math.Abs(player.Col - Carpet.BottomRightCol), Math.Abs(player.Col - Carpet.TopLeftCol));
+        return minDistensCol + minDistensRow;
+
+    }
 
 
 }
