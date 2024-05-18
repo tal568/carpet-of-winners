@@ -167,14 +167,14 @@ internal class Game
         switch (closestToWin)
         {
             case (0):
-                _printToScreent.PrintColorString("both player are the same distense", ConsoleColor.Cyan));
+                _printToScreent.PrintColorString("both player are the same distense\n", ConsoleColor.Cyan);
                 break;
             case (1):
-                _printToScreent.PrintColorString("player1 is closer to win",ConsoleColor.Cyan);
+                _printToScreent.PrintColorString("player1 is closer to win\n",ConsoleColor.Cyan);
                 break;
 
             case (2):
-                _printToScreen.PrintColrString("player2 is closer to win",Console.Colr.cyan);
+                _printToScreent.PrintColorString("player2 is closer to win\n", ConsoleColor.Cyan);
                 break;
         }
     }
