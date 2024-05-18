@@ -11,13 +11,11 @@ internal class Board
 
     public Board(int rows, int cols)
     {
-        _gridSize = new int[2] { rows, cols};
+        _gridSize = new int[2] { rows, cols };
         Carpet = null;
         Players = new List<Player>();
         _printToScreent = new();
     }
-
-
 
     public bool AddPlayer(Player player)
     {
@@ -94,11 +92,7 @@ internal class Board
 
     public bool IsWithinCarpet(int row, int col)
     {
-        if (Carpet is null)
-        {
-            throw new InvalidOperationException("carpet was not added to board");
-        }
-        return Carpet.Contains(row, col);
+        return Carpet!.Contains(row, col);
     }
 
     public bool MovePlayer(Player player, Direction direction)
@@ -121,7 +115,7 @@ internal class Board
                 newRow += 1;
                 break;
         }
-        if (IsIlegalMove(newRow, newCol))
+        if (IsIlegalMove(newRow, newCol, direction))
             return false;
         player.Move(newRow, newCol);
 
@@ -130,8 +124,16 @@ internal class Board
         return true;
     }
 
-    private bool IsIlegalMove(int newRow, int newCol)
+    private bool IsIlegalMove(int newRow, int newCol, Direction direction)
     {
+        if (direction == 0)
+        {
+            _printToScreent.PrintColorString(
+                $"Illegal Move: player can only move by usin the keys: 1,2,3,4. skiping turn\n",
+                ConsoleColor.Yellow
+            );
+            return true;
+        }
         if (!IsWithinBounds(newRow, newCol))
         {
             _printToScreent.PrintColorString(
