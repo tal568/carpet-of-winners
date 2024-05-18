@@ -1,4 +1,6 @@
-﻿namespace carpet_of_winners.git;
+﻿using carpet_of_winners.git.Utils;
+
+namespace carpet_of_winners.git;
 
 internal class Game
 {
@@ -96,7 +98,10 @@ internal class Game
                 isPlayerWon = IsPlayerWon(player1.Row, player1.Col, player2.Row, player2.Col);
                 if (isPlayerWon)
                 {
-                    Console.WriteLine($"player {player.Number} WON the round");
+                    _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
+                    _printToScreent.PrintColorString($"player {player.Number} WON the round\n",ConsoleColor.Cyan);
+                    _printToScreent.PrintColorString("* * * * * * * * * * * * * * * * * * * *\n", ConsoleColor.Cyan);
+
                     _gameStatistics["NumberOfWinsPlayer" + player.Number.ToString()] += 1;
                     break;
                 }
@@ -162,14 +167,14 @@ internal class Game
         switch (closestToWin)
         {
             case (0):
-                Console.WriteLine("both player are the same distense");
+                _printToScreent.PrintColorString("both player are the same distense", ConsoleColor.Cyan));
                 break;
             case (1):
-                Console.WriteLine("player1 is closer to win");
+                _printToScreent.PrintColorString("player1 is closer to win",ConsoleColor.Cyan);
                 break;
 
             case (2):
-                Console.WriteLine("player2 is closer to win");
+                _printToScreen.PrintColrString("player2 is closer to win",Console.Colr.cyan);
                 break;
         }
     }

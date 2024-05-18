@@ -1,4 +1,6 @@
-﻿namespace carpet_of_winners.git;
+﻿using carpet_of_winners.git.Utils;
+
+namespace carpet_of_winners.git;
 
 internal class Board
 {
