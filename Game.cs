@@ -159,22 +159,30 @@ internal class Game
     private void PrintBestChanchToWin(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
     {
         int closestToWin = getWinnerWithBestChances(rowIndexA, colIndexA, rowIndexB, colIndexB);
-        if (closestToWin == 0)
-            return;
-        if (closestToWin == 1)
-            Console.WriteLine("player1 is closer to win");
-        if (closestToWin == 2)
-            Console.WriteLine("player2 is closer to win");
+        switch (closestToWin)
+        {
+            case (0):
+                Console.WriteLine("both player are the same distense");
+                break;
+            case (1):
+                Console.WriteLine("player1 is closer to win");
+                break;
+
+            case (2):
+                Console.WriteLine("player2 is closer to win");
+                break;
+        }
     }
 
     private int getWinnerWithBestChances(int rowIndexA, int colIndexA, int rowIndexB, int colIndexB)
     {
         int player1Distense = _board.DistenseOfPlayerFromCarpet(rowIndexA, colIndexA);
         int player2Distense = _board.DistenseOfPlayerFromCarpet(rowIndexB, colIndexB);
-        if (player1Distense == 0 || player2Distense == 0)
-            return 0;
+
         if (player1Distense < player2Distense)
             return 1;
-        return 2;
+        if (player1Distense > player2Distense)
+            return 2;
+        return 0;
     }
 }
