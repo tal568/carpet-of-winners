@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("carpet-of-winners.git")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d27fbad4d92fe02e5251d6adcad1b2e36b767133")]
 [assembly: System.Reflection.AssemblyProductAttribute("carpet-of-winners.git")]
 [assembly: System.Reflection.AssemblyTitleAttribute("carpet-of-winners.git")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

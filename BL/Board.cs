@@ -1,6 +1,6 @@
 ﻿using carpet_of_winners.git.Utils;
 
-namespace carpet_of_winners.git;
+namespace carpet_of_winners.git.BL;
 
 internal class Board
 {
@@ -12,8 +12,7 @@ internal class Board
     public Board(int rows, int cols)
     {
         _gridSize = new int[2] { rows, cols };
-        Carpet = null;
-        Players = new List<Player>();
+        Players = new();
         _printToScreent = new();
     }
 
@@ -171,7 +170,7 @@ internal class Board
                     {
                         _printToScreent.PrintColorString(
                             player.Number.ToString() + " ",
-                            (player.Number == 1) ? ConsoleColor.Red : ConsoleColor.Green
+                            player.Number == 1 ? ConsoleColor.Red : ConsoleColor.Green
                         );
                         isPlayerHere = true;
                         break;
@@ -208,10 +207,16 @@ internal class Board
             );
         if (Carpet!.Contains(player.Row, player.Col))
             return 0;
+
+        return CalcMovesNumber(player);
+    }
+
+    private int CalcMovesNumber(Player player)
+    {
         int minDistensRow,
             minDistensCol;
         minDistensRow = Math.Min(
-            Math.Abs(player.Row - Carpet.BottomRightRow),
+            Math.Abs(player!.Row - Carpet!.BottomRightRow),
             Math.Abs(player.Row - Carpet.TopLeftRow)
         );
         minDistensCol = Math.Min(

@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using carpet_of_winners.git.Utils;
 
-namespace carpet_of_winners.git;
+namespace carpet_of_winners.git.BL;
 
 internal class Game
 {
@@ -50,7 +50,7 @@ internal class Game
         while (!isInpuValid)
         {
             Console.Write("do you wish to continue (y/n):");
-            Char userResponse = Console.ReadKey().KeyChar;
+            char userResponse = Console.ReadKey().KeyChar;
             Console.WriteLine("");
             switch (userResponse)
             {
@@ -67,8 +67,15 @@ internal class Game
 
     public void PrintGameStatistics()
     {
-        Console.WriteLine("player1 round won:" + _gameStatistics["NumberOfWinsPlayer1"]);
-        Console.WriteLine("player2 round won:" + _gameStatistics["NumberOfWinsPlayer2"]);
+        _printToScreent.PrintColorString(
+            $"Player 1 round won:{_gameStatistics["NumberOfWinsPlayer1"]}\n",
+            ConsoleColor.DarkCyan
+        );
+        _printToScreent.PrintColorString(
+            $"Player 2 round won:{_gameStatistics["NumberOfWinsPlayer2"]}\n",
+            ConsoleColor.DarkCyan
+        );
+
         PrintVictoryMessgae(PlayerNumberWithMostWins(), true);
     }
 
@@ -83,7 +90,7 @@ internal class Game
             foreach (var player in _board.Players)
             {
                 Direction direction;
-                Char userMove = GetMoveDiractionFromUserInput(player.Number);
+                char userMove = GetMoveDiractionFromUserInput(player.Number);
                 Enum.TryParse(userMove.ToString(), out direction);
                 if (_board.MovePlayer(player, direction))
                     _gameStatistics["totalSteps" + player.Number.ToString()] += 1;
@@ -113,7 +120,7 @@ internal class Game
 
     private void PrintVictoryMessgae(int playerNumber, bool isFinalGame)
     {
-        string stage = (isFinalGame ? "GAME!!!" : "Round");
+        string stage = isFinalGame ? "GAME!!!" : "Round";
         _printToScreent.PrintColorString(
             "* * * * * * * * * * * * * * * * * * * *\n",
             ConsoleColor.Cyan
@@ -128,10 +135,10 @@ internal class Game
         );
     }
 
-    private Char GetMoveDiractionFromUserInput(int playerNumber)
+    private char GetMoveDiractionFromUserInput(int playerNumber)
     {
         Console.Write($"user {playerNumber} turn (1-up 2-down 3-left 4-right):");
-        Char userMove = Console.ReadKey().KeyChar;
+        char userMove = Console.ReadKey().KeyChar;
         Console.WriteLine("");
         return userMove;
     }
@@ -211,18 +218,18 @@ internal class Game
         int closestToWin = getWinnerWithBestChances(rowIndexA, colIndexA, rowIndexB, colIndexB);
         switch (closestToWin)
         {
-            case (0):
+            case 0:
                 _printToScreent.PrintColorString(
                     "both player are the same distense\n",
                     ConsoleColor.Cyan
                 );
                 break;
-            case (1):
-                _printToScreent.PrintColorString("player1 is closer to win\n", ConsoleColor.Cyan);
+            case 1:
+                _printToScreent.PrintColorString("Player 1 is closer to win\n", ConsoleColor.Cyan);
                 break;
 
-            case (2):
-                _printToScreent.PrintColorString("player2 is closer to win\n", ConsoleColor.Cyan);
+            case 2:
+                _printToScreent.PrintColorString("Player2 is closer to win\n", ConsoleColor.Cyan);
                 break;
         }
     }

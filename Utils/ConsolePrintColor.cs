@@ -2,17 +2,19 @@
 
 public class ConsolePrintColorString
 {
-    private ConsoleColor originalForegroundColor;
+    private readonly ConsoleColor originalForegroundColor;
 
     public ConsolePrintColorString()
     {
         originalForegroundColor = Console.ForegroundColor;
     }
 
-    public void PrintColorString(string str, ConsoleColor color)
+    public void PrintColorString(string str, ConsoleColor fgColor)
     {
-        Console.ForegroundColor = color;
+        Console.ForegroundColor = fgColor;
+
         Console.Write(str);
+
         Console.ForegroundColor = originalForegroundColor;
     }
 }

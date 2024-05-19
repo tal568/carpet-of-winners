@@ -1,4 +1,4 @@
-﻿namespace carpet_of_winners.git;
+﻿namespace carpet_of_winners.git.BL;
 
 internal class Player
 {

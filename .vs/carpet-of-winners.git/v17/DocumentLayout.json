@@ -1,0 +1,153 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\My Projects\\carpet-of-winners.git\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\utils\\consoleprintcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:utils\\consoleprintcolor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\bl\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:bl\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\bl\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:bl\\board.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\bl\\carpet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:bl\\carpet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:bl\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|c:\\my projects\\carpet-of-winners.git\\readme.md||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{5F0218CE-4601-4650-99E5-DAD8E721C280}|carpet-of-winners.git.csproj|solutionrelative:readme.md||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Game.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\BL\\Game.cs",
+              "RelativeDocumentMoniker": "BL\\Game.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\BL\\Game.cs",
+              "RelativeToolTip": "BL\\Game.cs",
+              "ViewState": "AQIAAF8AAAAAAAAAAAAQwOcAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T10:45:42.987Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ConsolePrintColor.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\Utils\\ConsolePrintColor.cs",
+              "RelativeDocumentMoniker": "Utils\\ConsolePrintColor.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\Utils\\ConsolePrintColor.cs",
+              "RelativeToolTip": "Utils\\ConsolePrintColor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T09:59:22.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-05-17T12:53:32.402Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Board.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\BL\\Board.cs",
+              "RelativeDocumentMoniker": "BL\\Board.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\BL\\Board.cs",
+              "RelativeToolTip": "BL\\Board.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGsAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T10:45:42.993Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Carpet.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\BL\\Carpet.cs",
+              "RelativeDocumentMoniker": "BL\\Carpet.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\BL\\Carpet.cs",
+              "RelativeToolTip": "BL\\Carpet.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwBUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T10:45:42.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\BL\\Player.cs",
+              "RelativeDocumentMoniker": "BL\\Player.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\BL\\Player.cs",
+              "RelativeToolTip": "BL\\Player.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T12:53:32.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-16T17:53:14.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\My Projects\\carpet-of-winners.git\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\My Projects\\carpet-of-winners.git\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2024-05-17T15:57:21.888Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
